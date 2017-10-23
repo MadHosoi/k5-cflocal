@@ -34,7 +34,7 @@ app.get('/', function(req, res){
       function(error, response, body){
         res.render('main', {
           title: 'K5 Object Storage',
-          message: 'Welcome to Fujitsu K5 Object Storage Service!!',
+          message: 'Welcome to Fujitsu K5 Object Storage Service from CF local droplet!!',
           containers: body
         });         
       });

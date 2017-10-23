@@ -7,10 +7,23 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Launch via NPM",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "start",
+                "debug"
+            ],
+            "port": 9229,
+            "envFile": "${workspaceFolder}/2.Demo/.env",
+            "cwd": "${workspaceFolder}/2.Demo/app/"
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/2.Demo\\app\\index.js",
-            "envFile": "${workspaceFolder}/2.Demo\\.env",
-            "cwd": "${workspaceFolder}/2.Demo\\app\\"
+            "program": "${workspaceFolder}/2.Demo/app/index.js",
+            "envFile": "${workspaceFolder}/2.Demo/.env",
+            "cwd": "${workspaceFolder}/2.Demo/app/"
         }
     ]
 }

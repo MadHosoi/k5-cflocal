@@ -1,14 +1,27 @@
 # k5-cflocal demo
 
-If docker don not starts automatically
+If docker don not starts automatically in Windows with VirtualBox
 docker-machine start default
 
 local.yml => In order to configurate local instance of the droplet.
 
-cf local stage k5-cflocal-sample
+LOCAL
+cf local stage k5-cflocal-demo -p app
 
-# Errors
+cf local run k5-cflocal-demo -p 3000
 
-time="2017-10-23T12:17:52+02:00" level=info msg="Unable to use system certificate pool: crypto/x509: system root pool is not available on Windows"
+REMOTE
+cf push k5-cflocal-demo -p app
 
-Error: error during connect: Post https://192.168.99.100:2376/build?buildargs=null&cachefrom=null&cgroupparent=&cpuperiod=0&cpuquota=0&cpusetcpus=&cpusetmems=&cpushares=0&dockerfile=&forcerm=1&labels=null&memory=0&memswap=0&networkmode=&pull=1&rm=1&shmsize=0&t=cflocal&ulimits=null: dial tcp 192.168.99.100:2376: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+CONCLUSION:
+Better use to test the app & work with containers with less knowledge of Docker than Dockerfile & docker commands..
+Very usefull to test the app in the same environment than K5 CF.
+Very usefull to develop the app without worries about testing environment.
+With the use of DOCKER_HOST env. variable, it is easy to run & stage the droplets in remote docker hosts.
+
+Not a valid use to download or upload droplets to K5, for different reasons explained:
+
+K5 integration limited in push command because Error: unexpected '413 Request Entity Too Large' from: PUT https://api.uk-1.paas-cf.cloud.global.fujitsu.com/v2/apps/[GUID]]/droplet/upload
+
+K5 integration limited in pull & run droplet in local because unknown parse error: Invalid numeric literal at line 2, column 0
+Maybe it works with other droplets, but with Node.js ones.
