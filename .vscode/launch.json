@@ -8,7 +8,9 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/2.Demo\\app\\index.js"
+            "program": "${workspaceFolder}/2.Demo\\app\\index.js",
+            "envFile": "${workspaceFolder}/2.Demo\\.env",
+            "cwd": "${workspaceFolder}/2.Demo\\app\\"
         }
     ]
 }

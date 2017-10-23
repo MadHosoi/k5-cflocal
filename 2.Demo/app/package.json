@@ -28,6 +28,6 @@
     "url": "https://github.com/MadHosoi/k5-cflocal.git"
   },
   "engines": {
-    "node" : "8.7.0" 
+    "node": "8.7.0"
   }
 }
