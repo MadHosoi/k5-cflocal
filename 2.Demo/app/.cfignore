@@ -50,11 +50,12 @@ jspm_packages
 .yarn-integrity
 
 # dotenv environment variables file
-*.env
+.env
 
-Secrets
-
-local.yml
-manifest.yml
-*.cache
-*.droplet
+.gitignore
+.cfignore
+Dockerfile
+.dockerignore
+.eslintrc.json
+.jshintrc
+README

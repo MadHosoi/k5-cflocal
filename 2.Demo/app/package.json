@@ -1,0 +1,33 @@
+{
+  "name": "k5-cflocal-demo",
+  "version": "1.0.0",
+  "description": "K5 cf swift storage API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "K5",
+    "cf",
+    "SWIFT",
+    "Object Storage",
+    "Node.js"
+  ],
+  "author": "miguelangel.diego@ts.fujitsu.com",
+  "license": "MIT",
+  "dependencies": {
+    "cfenv": "^1.0.4",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "pug": "^2.0.0-rc.4",
+    "request": "^2.83.0"
+  },
+  "repository": {
+    "type": "GIT",
+    "url": "https://github.com/MadHosoi/k5-cflocal.git"
+  },
+  "engines": {
+    "node" : "8.7.0" 
+  }
+}
