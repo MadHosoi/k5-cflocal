@@ -1,0 +1,8 @@
+extends ../node_modules/jade-bootstrap/_bootstrap
+append body
+      .container
+        h1= title
+        h2= message
+        form(action="", method="post", enctype="multipart/form-data")
+            input(type="file", name="file")
+            input(type="submit", value="Send file")

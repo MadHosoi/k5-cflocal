@@ -5,11 +5,15 @@ const app = express();
 
 const swift = require("./lib/swift.js");
 
+const fileUpload = require('express-fileupload');
+
 app.use(session({secret: process.env.K5SECRET}));
 
 app.use(express.static(__dirname + '/public'));
 
 app.set('view engine', 'pug');
+
+app.use(fileUpload());
 
 var region = process.env.K5REGION || "";
 var contract = process.env.K5CONTRACT || "";
@@ -70,7 +74,10 @@ app.get('/authenticate', function(req, res) {
 
 app.get('/container/:name', function(req, res){
   sess = req.session;
-
+  if (sess.token === undefined){
+    res.redirect('/authenticate');
+  }
+  else{
   swift.getfiles(
     sess.token, 
     region, 
@@ -85,6 +92,7 @@ app.get('/container/:name', function(req, res){
         files: body
       });
     });
+  }
 });
 
 app.get('/container/:name/:file', function(req, res){
@@ -118,6 +126,42 @@ app.get('/container/:name/:file', function(req, res){
     );
   }
 });
+
+app.get('/upload/:name', function(req, res){
+  res.render('upload', {
+    title: 'K5 Object Storage - ' + req.params.name,
+    containername: req.params.name,
+    message: 'Select the file to upload to the container ' + req.params.name,
+  });
+});
+
+app.post('/upload/:name', function(req, res){
+  sess = req.session;
+  let file = req.files.file;
+
+  console.log("Uploading: " + file.name); 
+  swift.setfile(
+    sess.token, 
+    region,
+    projectid,
+    req.params.name,
+    file.name,
+    proxy,
+    function(error, response){
+      res.redirect('/container/' + req.params.name);
+      console.log("Uploaded: " + file.name + " : " + response.statusMessage); 
+    },
+    bufferToStream(file.data)
+  );
+});
+
+let Duplex = require('stream').Duplex;  
+function bufferToStream(buffer) {  
+  let stream = new Duplex();
+  stream.push(buffer);
+  stream.push(null);
+  return stream;
+}
 
 app.listen(process.env.PORT || 3000, function () {
   console.log('App listening on port '+ (process.env.PORT !== undefined ? process.env.PORT : 3000) +'');

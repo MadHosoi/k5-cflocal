@@ -1,10 +1,9 @@
-html
-  head
-    title= title
-    link(rel="stylesheet", href="/style/style.css")
-  body
-    h1= message
-    ul
-      each val in containers
-        li
-          a(href="/container/" + val.name class="blue")= val.name
+extends ../node_modules/jade-bootstrap/_bootstrap
+append body
+      .container
+        h1= title
+        h2= message
+          ul
+            each val in containers
+              li
+                a(href="/container/" + val.name)= val.name
