@@ -3,7 +3,19 @@
 If docker don not starts automatically in Windows with VirtualBox
 - docker-machine start default
 
-local.yml => In order to configurate local instance of the droplet.
+local.yml => In order to configurate local instance of the droplet, with this content:
+applications:
+- name: k5-cflocal-demo
+  command: npm install && npm start
+  buildpack: https://github.com/cloudfoundry/nodejs-buildpack.git
+  running_env:
+    K5REGION: "region"
+    K5CONTRACT: "contract"
+    K5PROJECTID: "projectid"
+    K5USER: "user"
+    K5PASSWORD: "password"
+    K5SECRET: "secret_whateverstring"
+
 
 in "2.Demo" folder:
 - LOCAL
